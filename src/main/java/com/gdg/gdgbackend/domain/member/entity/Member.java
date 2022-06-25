@@ -29,13 +29,19 @@ public class Member extends BaseEntity {
     private String password;
 
     @Column(length = 250)
-    private String memberTrip;
+    private LocalDateTime tripStartDate;
+
+    @Column(length = 250)
+    private Integer tripDuration;
 
     @Builder
-    public Member(String loginId, String password, String memberName) {
+    public Member(String loginId, String password, String memberName,
+                  LocalDateTime tripStartDate, Integer tripDuration) {
         this.loginId = loginId;
         this.memberName = memberName;
         this.password = password;
+        this.tripStartDate = tripStartDate;
+        this.tripDuration = tripDuration;
     }
 
     public static Member createMember(Member member) {
@@ -43,6 +49,8 @@ public class Member extends BaseEntity {
                 .loginId(member.getLoginId())
                 .memberName(member.getMemberName())
                 .password(member.getPassword())
+                .tripStartDate(member.getTripStartDate())
+                .tripDuration(member.getTripDuration())
                 .build();
     }
 

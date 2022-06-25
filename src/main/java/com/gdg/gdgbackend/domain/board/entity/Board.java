@@ -31,4 +31,10 @@ public class Board extends BaseEntity {
     @Column(nullable = false, length = 250)
     private String boardContent;
 
+    @Column(nullable = false, length = 500)
+    private String boardImageName;
+
+    @Column(nullable = false, length = 500)
+    private String boardImageUrl;
+
 }
