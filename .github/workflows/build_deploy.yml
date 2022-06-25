@@ -22,25 +22,25 @@ jobs:
         distribution: 'temurin' 
         
     - name: Make gradlew executable
-      run: chmod +x ./project-lion-api/gradlew
+      run: chmod +x ./gradlew
         
     - name: Build with Gradle
       uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
       with:
-        arguments: build 
-        build-root-directory: gdg-backend
+        arguments: build -x test
+        build-root-directory: .
         
     - name: Login to DockerHub 
       uses: docker/login-action@v1 
       with:
-        username: ${{secrets.DOCKERHUB_USERNAME}} 
-        password: ${{secrets.DOCKERHUB_TOKEN}}
+        username: ${{secrets.DOCKER_HUB_USERNAME}} 
+        password: ${{secrets.DOCKER_HUB_TOKEN}}
         
     - name: Build and push
       uses: docker/build-push-action@v2 
       with:
-        context: ./gdg-backend
-        file: ./gdg-backend/Dockerfile 
+        context: .
+        file: ./Dockerfile
         push: true
         tags: ${{env.NAME}}/${{env.REPO}}:latest
 
