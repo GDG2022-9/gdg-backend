@@ -39,7 +39,7 @@ public class Board extends BaseEntity {
     private String boardImageUrl;
 
     @Column(nullable = false)
-    private int totalCount;
+    private Integer totalCount;
 
     @Column(nullable = false)
     private int joinCount;
