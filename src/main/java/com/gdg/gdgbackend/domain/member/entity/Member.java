@@ -20,7 +20,7 @@ public class Member extends BaseEntity {
     private Long memberId;
 
     @Column(unique = true, length = 50, nullable = false)
-    private String memberLoginId;
+    private String loginId;
 
     @Column(nullable = false, length = 20)
     private String memberName;
@@ -31,22 +31,16 @@ public class Member extends BaseEntity {
     @Column(length = 250)
     private String memberTrip;
 
-
-    @Column(length = 250)
-    private String refreshToken;
-
-    private LocalDateTime tokenExpirationTime;
-
     @Builder
-    public Member(String memberLoginId, String password, String memberName) {
-        this.memberLoginId = memberLoginId;
+    public Member(String loginId, String password, String memberName) {
+        this.loginId = loginId;
         this.memberName = memberName;
         this.password = password;
     }
 
     public static Member createMember(Member member) {
         return Member.builder()
-                .memberLoginId(member.getMemberLoginId())
+                .loginId(member.getLoginId())
                 .memberName(member.getMemberName())
                 .password(member.getPassword())
                 .build();
