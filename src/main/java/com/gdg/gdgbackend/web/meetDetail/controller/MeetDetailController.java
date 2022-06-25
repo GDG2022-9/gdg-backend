@@ -2,6 +2,7 @@ package com.gdg.gdgbackend.web.meetDetail.controller;
 
 import com.gdg.gdgbackend.web.meetDetail.dto.MeetDetailDto;
 import com.gdg.gdgbackend.web.meetDetail.service.MeetDetailService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ public class MeetDetailController {
 
     private final MeetDetailService meetDetailService;
 
+    @ApiOperation(value = "밋트 정보 상세보기")
     @GetMapping("/{boardId}")
     public ResponseEntity getMeetDetail(@PathVariable Long boardId) {
 
