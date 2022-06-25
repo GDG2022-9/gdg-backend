@@ -1,11 +1,8 @@
 package com.gdg.gdgbackend.domain.board.entity;
 
 import com.gdg.gdgbackend.domain.base.BaseEntity;
-import com.gdg.gdgbackend.domain.boardImage.entity.BoardImage;
 import com.gdg.gdgbackend.domain.category.entity.Category;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +10,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "board")
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board extends BaseEntity {
 
