@@ -33,8 +33,7 @@ public class SecurityConfig {
         ;
 
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/register", "/images/**").permitAll()
-                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/**", "/api/**", "/images/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
@@ -47,7 +46,6 @@ public class SecurityConfig {
 
         http.exceptionHandling()
                 .authenticationEntryPoint(new AuthenticationEntryPointImpl())
-                .accessDeniedPage("/exception/access-denied")
         ;
 
         return http.build();
