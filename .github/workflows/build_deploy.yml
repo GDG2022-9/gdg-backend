@@ -39,8 +39,8 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2 
       with:
-        context: ./gdg-backend
-        file: ./gdg-backend/Dockerfile 
+        context: ./
+        file: ./Dockerfile 
         push: true
         tags: ${{env.NAME}}/${{env.REPO}}:latest
 
