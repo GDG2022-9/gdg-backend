@@ -1,6 +1,6 @@
 package com.gdg.gdgbackend.domain.board.entity;
 
-import com.gdg.gdgbackend.domain.base.BaseEntity;
+import com.gdg.gdgbackend.domain.base.BaseTimeEntity;
 import com.gdg.gdgbackend.domain.category.entity.Category;
 import lombok.*;
 
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Board extends BaseEntity {
+public class Board extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

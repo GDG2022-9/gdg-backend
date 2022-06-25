@@ -14,7 +14,7 @@ public class CustomMeetDto {
 
     private LocalDateTime tripStartDate;
 
-    private Integer tripDuration;
+    private LocalDateTime tripEndDate;
 
     private List<Board> customMeetList;
 }

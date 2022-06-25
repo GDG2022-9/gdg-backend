@@ -4,17 +4,13 @@ import com.gdg.gdgbackend.domain.board.entity.Board;
 import com.gdg.gdgbackend.domain.board.repository.BoardRepository;
 import com.gdg.gdgbackend.domain.category.entity.Category;
 import com.gdg.gdgbackend.domain.category.repository.CategoryRepository;
-import com.gdg.gdgbackend.domain.member.entity.Member;
-import com.gdg.gdgbackend.domain.member.repository.MemberRepository;
-import com.gdg.gdgbackend.global.error.exception.EntityNotFoundException;
-import com.gdg.gdgbackend.global.error.exception.ErrorCode;
 import com.gdg.gdgbackend.web.locationMeet.dto.LocationMeetDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +21,13 @@ public class LocationMeetService {
 
     private final CategoryRepository categoryRepository;
 
-    private final MemberRepository memberRepository;
-
     private final BoardRepository boardRepository;
 
-    public LocationMeetDto getLocationMeet(UserDetails userDetails, String mainCategory) {
+    public LocationMeetDto getLocationMeet(String mainCategory, String startDate, String endDate) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        LocalDateTime start = LocalDateTime.parse(startDate, formatter);
+        LocalDateTime end = LocalDateTime.parse(endDate, formatter);
 
         // 소분류
         List<Category> categoryList = categoryRepository.findAllByCategoryMain(mainCategory);
@@ -40,17 +38,11 @@ public class LocationMeetService {
         }
 
         // 밋트 개수
-        String loginId = userDetails.getUsername();
-        Member member = memberRepository.findByLoginId(loginId)
-                .orElseThrow(() -> new EntityNotFoundException(ErrorCode.MEMBER_NOT_EXIST));
-        LocalDateTime startDate = member.getTripStartDate();
-        Integer tripDuration = member.getTripDuration();
-        LocalDateTime endDate = startDate.plusDays(tripDuration);
-        long meetCount = boardRepository.getCount(startDate, endDate);
+        long meetCount = boardRepository.getCount(start, end);
         int count = Long.valueOf(meetCount).intValue();
 
         // 밋트 리스트
-        List<Board> locationMeetList = boardRepository.findAllByBoardDateBetween(startDate, endDate);
+        List<Board> locationMeetList = boardRepository.findAllByBoardDateBetween(start, end);
 
         return LocationMeetDto.builder()
                 .subCategoryList(subCategoryList)
