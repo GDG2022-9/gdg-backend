@@ -2,6 +2,7 @@ package com.gdg.gdgbackend.domain.board.entity;
 
 import com.gdg.gdgbackend.domain.base.BaseEntity;
 import com.gdg.gdgbackend.domain.boardImage.entity.BoardImage;
+import com.gdg.gdgbackend.domain.category.entity.Category;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,5 +44,9 @@ public class Board extends BaseEntity {
 
     @Column(nullable = false)
     private int joinCount;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
 }

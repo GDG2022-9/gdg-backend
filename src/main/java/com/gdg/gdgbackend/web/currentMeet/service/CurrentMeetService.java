@@ -18,7 +18,7 @@ public class CurrentMeetService {
 
     public CurrentMeetDto getCurrentMeet() {
 
-        List<Board> currentMeetList = boardRepository.findAllByOrdOrderByBoardDateAsc();
+        List<Board> currentMeetList = boardRepository.findAllByOrderByBoardDateAsc();
         CurrentMeetDto currentMeetDto = CurrentMeetDto.builder()
                 .currentMeetList(currentMeetList)
                 .build();
