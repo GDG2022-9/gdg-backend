@@ -43,7 +43,7 @@ public class MainService {
         List<Board> currentMeet = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             customMeet.add(customBoardList.get(i));
-            currentMeet.add(customBoardList.get(i));
+            currentMeet.add(currentBoardList.get(i));
         }
 
         MainDto mainDto = MainDto.of(tripStartDate, tripDuration, customMeet, currentMeet);
