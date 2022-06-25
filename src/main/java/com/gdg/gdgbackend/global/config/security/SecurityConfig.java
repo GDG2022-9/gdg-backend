@@ -20,25 +20,30 @@ public class SecurityConfig {
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/")
-                .usernameParameter("memberLoginId")
+                .loginPage("/api/login")
+                .loginProcessingUrl("/api/login")
+                .defaultSuccessUrl("/api")
+                .usernameParameter("loginId")
                 .passwordParameter("password")
-                .failureUrl("/login?isError=true")
+                .failureUrl("/api/login?isError=true")
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
+                .logoutSuccessUrl("/api")
         ;
 
         http.authorizeRequests()
                 .antMatchers("/", "/login", "/register", "/images/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(new AuthenticationEntryPointImpl())
         ;
+
+        http.headers().frameOptions().disable();
+
+        http.csrf().disable();
 
         http.exceptionHandling()
                 .authenticationEntryPoint(new AuthenticationEntryPointImpl())
