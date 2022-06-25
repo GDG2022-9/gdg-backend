@@ -54,4 +54,9 @@ public class Member extends BaseEntity {
                 .build();
     }
 
+    public void updateItem(LocalDateTime tripStartDate, Integer tripDuration) {
+        this.tripStartDate = tripStartDate;
+        this.tripDuration = tripDuration;
+    }
+
 }

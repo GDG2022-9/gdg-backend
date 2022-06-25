@@ -1,8 +1,5 @@
-package com.gdg.gdgbackend.web.main.controller;
+package com.gdg.gdgbackend.web.myPage.controller;
 
-import com.gdg.gdgbackend.global.config.security.UserDetailsImpl;
-import com.gdg.gdgbackend.web.main.dto.MainDto;
-import com.gdg.gdgbackend.web.main.service.MainService;
 import com.gdg.gdgbackend.web.myPage.dto.MyPageDto;
 import com.gdg.gdgbackend.web.myPage.service.MyPageService;
 import lombok.RequiredArgsConstructor;
@@ -14,22 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class MainController {
-
-    private final MainService mainService;
+public class MyPageController {
 
     private final MyPageService myPageService;
 
-    @GetMapping("/main")
-    public ResponseEntity getMain(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+    @GetMapping("/mypage")
+    public ResponseEntity getMyPage(@AuthenticationPrincipal UserDetails userDetails) {
 
-        String loginId = userDetails.getUsername();
-        MainDto mainDto = mainService.getMain(loginId);
+        MyPageDto myPageDto = myPageService.getMyPage(userDetails);
 
-        return ResponseEntity.ok(mainDto);
+        return ResponseEntity.ok(myPageDto);
     }
 
-    @PostMapping("/main")
+    @PostMapping("/mypage")
     public ResponseEntity registerTrip(@AuthenticationPrincipal UserDetails userDetails,
                                        @RequestBody MyPageDto myPageDto) {
 
