@@ -28,7 +28,8 @@ public class Board extends BaseEntity {
     @Column(nullable = false, length = 250)
     private String boardLocation;
 
-    @Column(nullable = false, length = 250)
+    @Lob
+    @Column(nullable = false)
     private String boardContent;
 
     @Column(nullable = false, length = 500)
@@ -36,5 +37,11 @@ public class Board extends BaseEntity {
 
     @Column(nullable = false, length = 500)
     private String boardImageUrl;
+
+    @Column(nullable = false)
+    private int totalCount;
+
+    @Column(nullable = false)
+    private int joinCount;
 
 }

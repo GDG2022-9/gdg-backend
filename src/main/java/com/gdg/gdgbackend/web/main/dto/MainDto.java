@@ -16,17 +16,17 @@ public class MainDto {
 
     private Integer tripDuration;
 
-    private List<Board> customBoardList;
+    private List<Board> customMeet;
 
-    private List<Board> currentBoardList;
+    private List<Board> currentMeet;
 
     public static MainDto of(LocalDateTime tripStartDate, Integer tripDuration,
-                             List<Board> customBoardList, List<Board> currentBoardList) {
+                             List<Board> customMeet, List<Board> currentMeet) {
         return MainDto.builder()
                 .tripStartDate(tripStartDate)
                 .tripDuration(tripDuration)
-                .customBoardList(customBoardList)
-                .currentBoardList(currentBoardList)
+                .customMeet(customMeet)
+                .currentMeet(currentMeet)
                 .build();
     }
 

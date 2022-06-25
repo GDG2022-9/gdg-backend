@@ -35,17 +35,18 @@ public class MainService {
         Integer tripDuration = member.getTripDuration();
         LocalDateTime tripEndDate = tripStartDate.plusDays(tripDuration);
 
-        // 맞춤 밋트
-        List<Board> dateBoardList = boardRepository.findAllByBoardDateBetween(tripStartDate, tripEndDate);
-        List<Board> customBoardList = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            customBoardList.add(dateBoardList.get(i));
-        }
-
-        // 실시간 밋트
+        // 맞춤 밋트 & 실시간 밋트
+        List<Board> customBoardList = boardRepository.findAllByBoardDateBetween(tripStartDate, tripEndDate);
         List<Board> currentBoardList = boardRepository.findAllByOrdOrderByBoardDateAsc();
 
-        MainDto mainDto = MainDto.of(tripStartDate, tripDuration, customBoardList, currentBoardList);
+        List<Board> customMeet = new ArrayList<>();
+        List<Board> currentMeet = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            customMeet.add(customBoardList.get(i));
+            currentMeet.add(customBoardList.get(i));
+        }
+
+        MainDto mainDto = MainDto.of(tripStartDate, tripDuration, customMeet, currentMeet);
 
         return mainDto;
 
