@@ -37,7 +37,7 @@ public class MainService {
 
         // 맞춤 밋트 & 실시간 밋트
         List<Board> customBoardList = boardRepository.findAllByBoardDateBetween(tripStartDate, tripEndDate);
-        List<Board> currentBoardList = boardRepository.findAllByOrdOrderByBoardDateAsc();
+        List<Board> currentBoardList = boardRepository.findAllByOrderByBoardDateAsc();
 
         List<Board> customMeet = new ArrayList<>();
         List<Board> currentMeet = new ArrayList<>();
